@@ -1,3 +1,6 @@
+# Just in case
+*.env
+
 # Compiled class file
 *.class
 

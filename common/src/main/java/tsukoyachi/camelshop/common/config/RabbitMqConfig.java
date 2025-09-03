@@ -1,4 +1,4 @@
-package tsukoyachi.camelshop.common.rabbitmq;
+package tsukoyachi.camelshop.common.config;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;

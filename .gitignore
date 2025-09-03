@@ -1,5 +1,6 @@
 # Just in case
 *.env
+*.db
 
 # Compiled class file
 *.class

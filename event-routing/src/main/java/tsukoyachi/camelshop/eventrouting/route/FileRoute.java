@@ -1,8 +1,11 @@
 package tsukoyachi.camelshop.eventrouting.route;
 
 import org.apache.camel.builder.RouteBuilder;
+import org.apache.camel.model.dataformat.CsvDataFormat;
+import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import tsukoyachi.camelshop.eventrouting.handler.file.CsvFileHandler;
 
 @Component
 public class FileRoute extends RouteBuilder {
@@ -21,19 +24,34 @@ public class FileRoute extends RouteBuilder {
                 .to(String.format("file:%s", errorDir))
                 .end();
 
-        from(String.format("file:%s?noop=false&delete=true", inputDir))
+        from(String.format("file:%s?noop=true", inputDir))
                 .routeId("FileRoute")
                 .log("Processing file: ${header.CamelFileName}")
                 .choice()
                 .when(header("CamelFileName").endsWith(".csv"))
-                .log("This is a CSV file.")
+                    .to("direct:handleCsv")
                 .when(header("CamelFileName").endsWith(".json"))
-                .log("This is a JSON file.")
+                    .to("direct:handleJson")
                 .when(header("CamelFileName").endsWith(".xml"))
-                .log("This is a XML file.")
+                    .to("direct:handleXml")
                 .otherwise()
-                .throwException(new IllegalArgumentException("Unknown file type."))
-                .end()
-                .to(String.format("file:%s", processedDir));
+                    .throwException(new IllegalArgumentException("Unknown file type."))
+                .end();
+
+        from("direct:handleCsv")
+            .log("This is a CSV file.")
+                .unmarshal().csv()
+                .bean(CsvFileHandler.class, "process")
+                .end();
+
+        from("direct:handleJson")
+            .log("This is a JSON file.")
+                .unmarshal().json(JsonLibrary.Jackson)
+                .end();
+
+        from("direct:handleXml")
+            .log("This is a XML file.")
+
+                .end();
     }
 }

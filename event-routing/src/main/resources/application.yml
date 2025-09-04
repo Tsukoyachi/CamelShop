@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: event-routing
+  datasource:
+    url: jdbc:sqlite:camelshop.db
+  jpa:
+    show-sql: true
+camelshop:
+  event-routing:
+    input-directory: event-routing/data/input
+    processed-directory: event-routing/data/processed
+    error-directory: event-routing/data/error
+  rabbitmq:
+    exchange: eventrouting.exchange
+    queue: eventrouting.queue
+    routingKey: camelshop.#

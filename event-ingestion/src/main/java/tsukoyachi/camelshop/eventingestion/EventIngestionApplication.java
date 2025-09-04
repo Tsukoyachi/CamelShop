@@ -1,16 +1,12 @@
 package tsukoyachi.camelshop.eventingestion;
 
-import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import tsukoyachi.camelshop.common.config.RabbitMqConfig;
+import tsukoyachi.camelshop.common.config.SqliteConfig;
 
 @SpringBootApplication
-@EnableRabbit
-@Import(
-        RabbitMqConfig.class
-)
+@Import({SqliteConfig.class})
 public class EventIngestionApplication {
 
     public static void main(String[] args) {

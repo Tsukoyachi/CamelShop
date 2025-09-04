@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/CamelShop.iml" filepath="$PROJECT_DIR$/.idea/CamelShop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/event-ingestion/event-ingestion.iml" filepath="$PROJECT_DIR$/event-ingestion/event-ingestion.iml" />
     </modules>
   </component>
 </project>

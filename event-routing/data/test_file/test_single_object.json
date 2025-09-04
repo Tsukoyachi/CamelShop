@@ -1,0 +1,7 @@
+{
+  "eventType": "signup",
+  "userId": "USER123",
+  "username": "John_Doe",
+  "email": "john.doe@camelshop.com",
+  "createdAt": "2025-09-03T19:00:00Z"
+}

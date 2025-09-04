@@ -1,0 +1,33 @@
+[
+  {
+    "eventType": "signup",
+    "userId": "USER123",
+    "username": "John_Doe",
+    "email": "john.doe@camelshop.com",
+    "createdAt": "2025-09-03T19:00:00Z"
+  },
+  {
+    "eventType": "order_created",
+    "userId": "USER123",
+    "orderId": "ORDER987",
+    "items": [
+      { "itemId": "ITEM1", "quantity": 1 },
+      { "itemId": "ITEM2", "quantity": 3 }
+    ],
+    "createdAt": "2025-09-03T10:15:30Z"
+  },
+  {
+    "eventType": "payment_processed",
+    "userId": "USER123",
+    "orderId": "ORDER987",
+    "billId": "BILL123",
+    "createdAt": "2025-09-03T10:20:00Z"
+  },
+  {
+    "eventType": "shipment_delivered",
+    "userId": "USER123",
+    "orderId": "ORDER987",
+    "parcelId": "PARCEL123",
+    "createdAt": "2025-09-04T13:03:00Z"
+  }
+]

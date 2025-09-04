@@ -19,38 +19,23 @@ import java.util.HashMap;
 public class CsvFileHandler implements FileHandler {
     @Override
     public void process(Exchange exchange) {
+        @SuppressWarnings("unchecked")
         List<List<String>> csv = (List<List<String>>) exchange.getIn().getBody();
-        for (List<String> row : csv) {
-            if (row.isEmpty()) {
-                continue;
-            }
 
-            String eventType = row.getFirst();
-            processEvent(eventType, row);
-        }
+        csv.stream()
+           .filter(row -> !row.isEmpty())
+           .forEach(row -> processEvent(row.getFirst(), row));
     }
 
     private void processEvent(String eventType, List<String> row) {
+        log.info("Processing {} event: {}", eventType, row);
+
         switch (eventType) {
-            case "signup":
-                log.info("Processing signup event: {}", row);
-                processSignup(row);
-                break;
-            case "order_created":
-                log.info("Processing order_created event: {}", row);
-                processOrderCreated(row);
-                break;
-            case "payment_processed":
-                log.info("Processing payment_processed event: {}", row);
-                processPaymentProcessed(row);
-                break;
-            case "shipment_delivered":
-                log.info("Processing shipment_delivered event: {}", row);
-                processShipmentDelivered(row);
-                break;
-            default:
-                log.warn("Unknown event type: {}", eventType);
-                break;
+            case "signup" -> processSignup(row);
+            case "order_created" -> processOrderCreated(row);
+            case "payment_processed" -> processPaymentProcessed(row);
+            case "shipment_delivered" -> processShipmentDelivered(row);
+            default -> log.warn("Unknown event type: {}", eventType);
         }
     }
 
@@ -59,13 +44,15 @@ public class CsvFileHandler implements FileHandler {
             throw new IllegalArgumentException("Row must not be null or empty");
         }
         if (row.size() < expectedColumns) {
-            throw new IllegalArgumentException(String.format("Row must have at least %d columns for a %s event", expectedColumns, eventType));
+            throw new IllegalArgumentException(
+                "Row must have at least %d columns for a %s event".formatted(expectedColumns, eventType)
+            );
         }
     }
 
     private void validateNotEmpty(String value, String fieldName) {
         if (value == null || value.isEmpty()) {
-            throw new IllegalArgumentException(String.format("%s must not be null or empty", fieldName));
+            throw new IllegalArgumentException("%s must not be null or empty".formatted(fieldName));
         }
     }
 
@@ -145,13 +132,14 @@ public class CsvFileHandler implements FileHandler {
 
     private Map<String, Integer> parseCart(String cartString) {
         Map<String, Integer> cart = new HashMap<>();
-        String[] items = cartString.split("\\|");
-        for (String item : items) {
+
+        for (String item : cartString.split("\\|")) {
             String[] parts = item.split(":");
             if (parts.length == 2) {
                 cart.put(parts[0].trim(), Integer.parseInt(parts[1].trim()));
             }
         }
+
         return cart;
     }
 }

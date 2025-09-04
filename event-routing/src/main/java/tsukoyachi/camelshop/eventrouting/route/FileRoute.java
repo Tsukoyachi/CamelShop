@@ -6,6 +6,7 @@ import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import tsukoyachi.camelshop.eventrouting.handler.file.CsvFileHandler;
+import tsukoyachi.camelshop.eventrouting.handler.file.JsonFileHandler;
 
 @Component
 public class FileRoute extends RouteBuilder {
@@ -45,6 +46,7 @@ public class FileRoute extends RouteBuilder {
         from("direct:handleJson")
             .log("This is a JSON file.")
                 .unmarshal().json(JsonLibrary.Jackson)
+                .bean(JsonFileHandler.class, "process")
                 .end();
 
         from("direct:handleXml")

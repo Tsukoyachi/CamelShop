@@ -107,7 +107,7 @@ public class JsonFileHandler implements FileHandler {
     private void processPaymentProcessedFromJson(Map<String, Object> json) {
         String orderId = getStringValue(json, "orderId");
         String userId = getStringValue(json, "userId");
-        String billingId = getStringValue(json, "billingId");
+        String billingId = getStringValue(json, "billId");
         Date processedAt = parseDateFromJson(json, "processedAt");
 
         PaymentProcessedEvent event = new PaymentProcessedEvent(orderId, userId, billingId, processedAt);
@@ -117,10 +117,10 @@ public class JsonFileHandler implements FileHandler {
     private void processShipmentDeliveredFromJson(Map<String, Object> json) {
         String userId = getStringValue(json, "userId");
         String orderId = getStringValue(json, "orderId");
-        String shipmentId = getStringValue(json, "shipmentId");
+        String parcelId = getStringValue(json, "parcelId");
         Date deliveredAt = parseDateFromJson(json, "deliveredAt");
 
-        ShipmentDeliveredEvent event = new ShipmentDeliveredEvent(userId, orderId, shipmentId, deliveredAt);
+        ShipmentDeliveredEvent event = new ShipmentDeliveredEvent(userId, orderId, parcelId, deliveredAt);
         log.info("Shipment delivered event: {}", event);
     }
 

@@ -118,15 +118,15 @@ public class CsvFileHandler implements FileHandler {
 
         String userId = row.get(1);
         String orderId = row.get(2);
-        String shipmentId = row.get(3);
+        String parcelId = row.get(3);
         String dateString = row.get(4);
 
         validateNotEmpty(userId, "User ID");
         validateNotEmpty(orderId, "Order ID");
-        validateNotEmpty(shipmentId, "Shipment ID");
+        validateNotEmpty(parcelId, "Parcel ID");
 
         Date deliveredAt = parseDate(dateString);
-        ShipmentDeliveredEvent event = new ShipmentDeliveredEvent(userId, orderId, shipmentId, deliveredAt);
+        ShipmentDeliveredEvent event = new ShipmentDeliveredEvent(userId, orderId, parcelId, deliveredAt);
         log.info("Shipment delivered event: {}", event);
     }
 

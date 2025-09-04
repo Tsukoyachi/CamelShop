@@ -21,13 +21,13 @@
     "userId": "USER123",
     "orderId": "ORDER987",
     "billId": "BILL123",
-    "createdAt": "2025-09-03T10:20:00Z"
+    "processedAt": "2025-09-03T10:20:00Z"
   },
   {
     "eventType": "shipment_delivered",
     "userId": "USER123",
     "orderId": "ORDER987",
     "parcelId": "PARCEL123",
-    "createdAt": "2025-09-04T13:03:00Z"
+    "deliveredAt": "2025-09-04T13:03:00Z"
   }
 ]

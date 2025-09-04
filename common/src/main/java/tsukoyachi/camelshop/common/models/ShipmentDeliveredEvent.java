@@ -5,7 +5,7 @@ import java.util.Date;
 public record ShipmentDeliveredEvent(
         String userId,
         String orderId,
-        String shipmentId,
+        String parcelId,
         Date deliveredAt
 ) {
 }

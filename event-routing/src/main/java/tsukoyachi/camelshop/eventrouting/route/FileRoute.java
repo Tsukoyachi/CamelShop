@@ -1,5 +1,6 @@
 package tsukoyachi.camelshop.eventrouting.route;
 
+import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.CsvDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import tsukoyachi.camelshop.eventrouting.handler.file.CsvFileHandler;
 import tsukoyachi.camelshop.eventrouting.handler.file.JsonFileHandler;
+import tsukoyachi.camelshop.eventrouting.handler.file.XmlFileHandler;
 
 @Component
 public class FileRoute extends RouteBuilder {
@@ -45,13 +47,22 @@ public class FileRoute extends RouteBuilder {
 
         from("direct:handleJson")
             .log("This is a JSON file.")
-                .unmarshal().json(JsonLibrary.Jackson)
-                .bean(JsonFileHandler.class, "process")
-                .end();
+            .choice()
+                .when(PredicateBuilder.and(body().isNotNull(), body().regex("(?s).*[\\{\\[].*")))
+                    .unmarshal().json(JsonLibrary.Jackson)
+                    .bean(JsonFileHandler.class, "process")
+                .otherwise()
+                    .log("JSON file is empty or invalid, skipping processing")
+            .end();
 
         from("direct:handleXml")
             .log("This is a XML file.")
-
-                .end();
+            .choice()
+                .when(PredicateBuilder.and(body().isNotNull(), body().regex("(?s).*<\\w+.*>.*")))
+                    .convertBodyTo(org.w3c.dom.Document.class)
+                    .bean(XmlFileHandler.class, "process")
+                .otherwise()
+                    .log("XML file is empty or invalid, skipping processing")
+            .end();
     }
 }

@@ -4,8 +4,6 @@ import org.apache.camel.builder.RouteBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-
 @Component
 public class FileRoute extends RouteBuilder {
     @Value("${camelshop.event-routing.input-directory}")
@@ -27,15 +25,15 @@ public class FileRoute extends RouteBuilder {
                 .routeId("FileRoute")
                 .log("Processing file: ${header.CamelFileName}")
                 .choice()
-                    .when(header("CamelFileName").endsWith(".csv"))
-                        .log("This is a CSV file.")
-                    .when(header("CamelFileName").endsWith(".json"))
-                        .log("This is a JSON file.")
-                    .when(header("CamelFileName").endsWith(".xml"))
-                        .log("This is a XML file.")
-                    .otherwise()
-                        .throwException(new IllegalArgumentException("Unknown file type."))
+                .when(header("CamelFileName").endsWith(".csv"))
+                .log("This is a CSV file.")
+                .when(header("CamelFileName").endsWith(".json"))
+                .log("This is a JSON file.")
+                .when(header("CamelFileName").endsWith(".xml"))
+                .log("This is a XML file.")
+                .otherwise()
+                .throwException(new IllegalArgumentException("Unknown file type."))
                 .end()
-        .to(String.format("file:%s", processedDir));
+                .to(String.format("file:%s", processedDir));
     }
 }

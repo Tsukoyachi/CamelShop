@@ -11,7 +11,7 @@ spring:
   jpa:
     show-sql: true
 camelshop:
-    rabbitmq:
-        exchange: eventingestion.exchange
-        queue: eventingestion.queue
-        routingKey: camelshop.#
+  rabbitmq:
+    exchange: eventingestion.exchange
+    queue: eventingestion.queue
+    routingKey: camelshop.#

@@ -15,11 +15,11 @@ public class EventRoute extends RouteBuilder {
     public void configure() throws Exception {
         // Some test for camel setup with rabbitmq instead of classic rabbitmq listener
         from("spring-rabbitmq:" + exchangeName + "?queues=" + queueName)
-                .log("Received message from RabbitMQ: ${body}")
-                .choice()
-                    .when(body().contains("Camel"))
-                        .log("Message is true")
-                    .otherwise()
-                        .log("Message is not true");
+            .log("Received message from RabbitMQ: ${body}")
+            .choice()
+                .when(body().contains("Camel"))
+                    .log("Message is true")
+                .otherwise()
+                    .log("Message is not true");
     }
 }

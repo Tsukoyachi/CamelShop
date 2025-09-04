@@ -11,8 +11,6 @@ import tsukoyachi.camelshop.eventrouting.handler.file.CsvFileHandler;
 public class FileRoute extends RouteBuilder {
     @Value("${camelshop.event-routing.input-directory}")
     private String inputDir;
-    @Value("${camelshop.event-routing.processed-directory}")
-    private String processedDir;
     @Value("${camelshop.event-routing.error-directory}")
     private String errorDir;
 

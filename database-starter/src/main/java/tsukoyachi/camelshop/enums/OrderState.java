@@ -1,4 +1,4 @@
-package tsukoyachi.camelshop.common.enums;
+package tsukoyachi.camelshop.enums;
 
 public enum OrderState {
     CREATED,

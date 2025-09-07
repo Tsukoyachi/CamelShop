@@ -1,16 +1,18 @@
-package tsukoyachi.camelshop.common.config;
+package tsukoyachi.camelshop.config;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ConditionalOnProperty(name = "spring.datasource.driver-class-name", havingValue = "org.sqlite.JDBC")
+@EntityScan(basePackages = "tsukoyachi.camelshop.entity")
+@ComponentScan(basePackages = "tsukoyachi.camelshop.repository")
 public class SqliteConfig {
 
     @Bean

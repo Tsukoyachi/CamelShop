@@ -1,4 +1,4 @@
-package tsukoyachi.camelshop.common.entity;
+package tsukoyachi.camelshop.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

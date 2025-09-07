@@ -7,6 +7,7 @@
         <option value="$PROJECT_DIR$/event-ingestion/pom.xml" />
         <option value="$PROJECT_DIR$/common/pom.xml" />
         <option value="$PROJECT_DIR$/event-routing/pom.xml" />
+        <option value="$PROJECT_DIR$/database-starter/pom.xml" />
       </list>
     </option>
   </component>

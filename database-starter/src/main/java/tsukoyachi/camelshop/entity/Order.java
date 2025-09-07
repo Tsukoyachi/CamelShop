@@ -1,7 +1,7 @@
-package tsukoyachi.camelshop.common.entity;
+package tsukoyachi.camelshop.entity;
 
 import jakarta.persistence.*;
-import tsukoyachi.camelshop.common.enums.OrderState;
+import tsukoyachi.camelshop.enums.OrderState;
 
 import java.math.BigDecimal;
 import java.util.Date;

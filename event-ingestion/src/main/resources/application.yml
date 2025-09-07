@@ -6,8 +6,6 @@ spring:
     port: 5672
     username: guest
     password: guest
-  jpa:
-    show-sql: true
 camelshop:
   datasource:
     url: jdbc:sqlite:camelshop.db

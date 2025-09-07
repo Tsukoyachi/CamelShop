@@ -3,6 +3,7 @@ package tsukoyachi.camelshop.entity;
 import jakarta.persistence.*;
 
 @Entity
+@Table
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

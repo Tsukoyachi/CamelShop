@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/event-ingestion/src/main/resources/application.yml">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/event-ingestion/src/main/resources/application.yml" />
+              <option name="originalContent" value="spring:&#10;  application:&#10;    name: event-ingestion&#10;  rabbitmq:&#10;    host: localhost&#10;    port: 5672&#10;    username: guest&#10;    password: guest&#10;camelshop:&#10;  datasource:&#10;    url: jdbc:sqlite:camelshop.db&#10;  rabbitmq:&#10;    exchange: eventingestion.exchange&#10;    queue: eventingestion.queue&#10;    routingKey: camelshop.#" />
+              <option name="updatedContent" value="spring:&#10;  application:&#10;    name: event-ingestion&#10;  rabbitmq:&#10;    host: localhost&#10;    port: 5672&#10;    username: guest&#10;    password: guest&#10;camelshop:&#10;  datasource:&#10;    url: jdbc:sqlite:camelshop.db&#10;  rabbitmq:&#10;    exchange: eventingestion.exchange&#10;    queue: eventingestion.queue&#10;    routingKey: camelshop.#" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

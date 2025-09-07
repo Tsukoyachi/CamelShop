@@ -3,16 +3,16 @@ package tsukoyachi.camelshop.eventrouting.handler.file;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
-import tsukoyachi.camelshop.common.models.SignupEvent;
 import tsukoyachi.camelshop.common.models.OrderCreatedEvent;
 import tsukoyachi.camelshop.common.models.PaymentProcessedEvent;
 import tsukoyachi.camelshop.common.models.ShipmentDeliveredEvent;
+import tsukoyachi.camelshop.common.models.SignupEvent;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -31,12 +31,12 @@ public class JsonFileHandler implements FileHandler {
                 log.info("Processing JSON list of size {}", list.size());
                 processJsonList(list);
             }
-            case Map<?,?> map -> {
+            case Map<?, ?> map -> {
                 log.info("Processing single JSON object");
                 processJsonObject((Map<String, Object>) map);
             }
             default -> throw new IllegalArgumentException(
-                "Unsupported body type: %s".formatted(body.getClass().getName())
+                    "Unsupported body type: %s".formatted(body.getClass().getName())
             );
         }
     }
@@ -131,22 +131,22 @@ public class JsonFileHandler implements FileHandler {
 
         switch (itemsObj) {
             case List<?> items -> items.stream()
-                 .filter(Map.class::isInstance)
-                 .map(item -> (Map<String, Object>) item)
-                 .forEach(itemData -> {
-                     String itemId = (String) itemData.get("itemId");
-                     Object quantityObj = itemData.get("quantity");
+                    .filter(Map.class::isInstance)
+                    .map(item -> (Map<String, Object>) item)
+                    .forEach(itemData -> {
+                        String itemId = (String) itemData.get("itemId");
+                        Object quantityObj = itemData.get("quantity");
 
-                     if (itemId != null && quantityObj != null) {
-                         Integer quantity = switch (quantityObj) {
-                             case Integer i -> i;
-                             case Object obj -> Integer.parseInt(obj.toString());
-                         };
-                         cart.put(itemId, quantity);
-                     }
-                 });
+                        if (itemId != null && quantityObj != null) {
+                            Integer quantity = switch (quantityObj) {
+                                case Integer i -> i;
+                                case Object obj -> Integer.parseInt(obj.toString());
+                            };
+                            cart.put(itemId, quantity);
+                        }
+                    });
 
-            case Map<?,?> itemsMap -> {
+            case Map<?, ?> itemsMap -> {
                 Map<String, Object> items = (Map<String, Object>) itemsMap;
                 items.forEach((key, value) -> {
                     Integer quantity = switch (value) {

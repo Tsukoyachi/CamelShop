@@ -2,7 +2,6 @@ package tsukoyachi.camelshop.eventrouting.route;
 
 import org.apache.camel.builder.PredicateBuilder;
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.model.dataformat.CsvDataFormat;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -30,30 +29,32 @@ public class FileRoute extends RouteBuilder {
                 .log("Processing file: ${header.CamelFileName}")
                 .choice()
                 .when(header("CamelFileName").endsWith(".csv"))
-                    .to("direct:handleCsv")
+                .to("direct:handleCsv")
                 .when(header("CamelFileName").endsWith(".json"))
-                    .to("direct:handleJson")
+                .to("direct:handleJson")
                 .when(header("CamelFileName").endsWith(".xml"))
-                    .to("direct:handleXml")
+                .to("direct:handleXml")
                 .otherwise()
-                    .throwException(new IllegalArgumentException("Unknown file type."))
+                .throwException(new IllegalArgumentException("Unknown file type."))
                 .end();
 
         from("direct:handleCsv")
             .log("This is a CSV file.")
-                .unmarshal().csv()
-                .bean(CsvFileHandler.class, "process")
+            .unmarshal()
+            .csv()
+            .bean(CsvFileHandler.class, "process")
                 .end();
 
         from("direct:handleJson")
             .log("This is a JSON file.")
             .choice()
                 .when(PredicateBuilder.and(body().isNotNull(), body().regex("(?s).*[\\{\\[].*")))
-                    .unmarshal().json(JsonLibrary.Jackson)
+                    .unmarshal()
+                    .json(JsonLibrary.Jackson)
                     .bean(JsonFileHandler.class, "process")
                 .otherwise()
                     .log("JSON file is empty or invalid, skipping processing")
-            .end();
+                .end();
 
         from("direct:handleXml")
             .log("This is a XML file.")
@@ -63,6 +64,6 @@ public class FileRoute extends RouteBuilder {
                     .bean(XmlFileHandler.class, "process")
                 .otherwise()
                     .log("XML file is empty or invalid, skipping processing")
-            .end();
+                .end();
     }
 }

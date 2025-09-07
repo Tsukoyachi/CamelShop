@@ -11,10 +11,10 @@ public class Product {
     @Id
     private String id;
 
-    @Column(name= "name", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name= "price", nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
     public String getId() {

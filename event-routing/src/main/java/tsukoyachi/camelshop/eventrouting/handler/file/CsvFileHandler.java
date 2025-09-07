@@ -3,16 +3,16 @@ package tsukoyachi.camelshop.eventrouting.handler.file;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.camel.Exchange;
 import org.springframework.stereotype.Component;
-import tsukoyachi.camelshop.common.models.SignupEvent;
 import tsukoyachi.camelshop.common.models.OrderCreatedEvent;
 import tsukoyachi.camelshop.common.models.PaymentProcessedEvent;
 import tsukoyachi.camelshop.common.models.ShipmentDeliveredEvent;
+import tsukoyachi.camelshop.common.models.SignupEvent;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 
 @Slf4j
 @Component
@@ -23,8 +23,8 @@ public class CsvFileHandler implements FileHandler {
         List<List<String>> csv = (List<List<String>>) exchange.getIn().getBody();
 
         csv.stream()
-           .filter(row -> !row.isEmpty())
-           .forEach(row -> processEvent(row.getFirst(), row));
+                .filter(row -> !row.isEmpty())
+                .forEach(row -> processEvent(row.getFirst(), row));
     }
 
     private void processEvent(String eventType, List<String> row) {
@@ -45,7 +45,7 @@ public class CsvFileHandler implements FileHandler {
         }
         if (row.size() < expectedColumns) {
             throw new IllegalArgumentException(
-                "Row must have at least %d columns for a %s event".formatted(expectedColumns, eventType)
+                    "Row must have at least %d columns for a %s event".formatted(expectedColumns, eventType)
             );
         }
     }

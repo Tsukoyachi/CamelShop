@@ -6,15 +6,15 @@ import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
-import tsukoyachi.camelshop.common.models.SignupEvent;
 import tsukoyachi.camelshop.common.models.OrderCreatedEvent;
 import tsukoyachi.camelshop.common.models.PaymentProcessedEvent;
 import tsukoyachi.camelshop.common.models.ShipmentDeliveredEvent;
+import tsukoyachi.camelshop.common.models.SignupEvent;
 
 import java.time.Instant;
 import java.util.Date;
-import java.util.Map;
 import java.util.HashMap;
+import java.util.Map;
 
 @Slf4j
 @Component

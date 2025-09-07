@@ -11,8 +11,14 @@
     "userId": "USER123",
     "orderId": "ORDER987",
     "items": [
-      { "itemId": "ITEM1", "quantity": 1 },
-      { "itemId": "ITEM2", "quantity": 3 }
+      {
+        "itemId": "ITEM1",
+        "quantity": 1
+      },
+      {
+        "itemId": "ITEM2",
+        "quantity": 3
+      }
     ],
     "createdAt": "2025-09-03T10:15:30Z"
   },

@@ -9,14 +9,14 @@ public class User {
     @Id
     private String id;
 
-    @Column(name= "username", nullable = false)
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name= "email", nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @Temporal(TemporalType.DATE)
-    @Column(name= "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false)
     private Date createdAt;
 
     public String getId() {

@@ -3,7 +3,7 @@ package tsukoyachi.camelshop.eventingestion;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
-import tsukoyachi.camelshop.common.config.SqliteConfig;
+import tsukoyachi.camelshop.config.SqliteConfig;
 
 @SpringBootApplication
 @Import({SqliteConfig.class})

@@ -6,11 +6,11 @@ spring:
     port: 5672
     username: guest
     password: guest
-  datasource:
-    url: jdbc:sqlite:camelshop.db
   jpa:
     show-sql: true
 camelshop:
+  datasource:
+    url: jdbc:sqlite:camelshop.db
   rabbitmq:
     exchange: eventingestion.exchange
     queue: eventingestion.queue

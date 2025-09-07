@@ -1,5 +1,6 @@
 package tsukoyachi.camelshop.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -15,11 +16,15 @@ import java.util.Properties;
 @ComponentScan(basePackages = "tsukoyachi.camelshop.repository")
 public class SqliteConfig {
 
+    @Value("${camelshop.datasource.url}")
+    private String databaseUrl;
+
     @Bean
     @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() {
         return DataSourceBuilder.create()
                 .driverClassName("org.sqlite.JDBC")
+                .url(databaseUrl)
                 .build();
     }
 
